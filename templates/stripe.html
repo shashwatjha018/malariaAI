@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+<!--Head tag-->
+{% block head %}
+{{ super() }}
+<!-- <meta http-equiv="refresh" content="8"> -->
+<link href="{{ url_for('static', filename='narrow-jumbotron.css') }}" rel="stylesheet">
+<style>
+  nav {
+    position: relative;
+    bottom: 20px;
+  }
+
+  body {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(139deg, rgba(2, 0, 36, 1) 0%, rgba(6, 6, 92, 1) 81%, rgba(22, 39, 43, 1) 100%);
+    min-height: 96vh;
+  }
+
+  footer {
+    position: relative;
+    top: 122px;
+  }
+</style>
+{% endblock %}
+<!--Title tag-->
+{% block title %}MalariaAI{% endblock %}
+<!--Body tag-->
+{% block content %}
+<div class="container">
+  <div class="header clearfix">
+    <h3 class="text-muted">Buy Here</h3>
+  </div>
+  <div class="jumbotron">
+    <h1 class="display-3">MalariaAI Product</h1>
+    <p class="lead">Purchase our Product for only Rs 200.</p>
+    <a href="#" id="buy_now_btn" class="btn btn-primary">Buy Now</a>
+  </div>
+</div> <!-- /container -->
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{{ url_for('static', filename='script-ajax.js') }}"></script>
+{% endblock %}

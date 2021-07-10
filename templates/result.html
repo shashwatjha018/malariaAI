@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+<!--Head tag-->
+{% block head %}
+{{ super() }}
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(139deg, rgba(2, 0, 36, 1) 0%, rgba(6, 6, 92, 1) 81%, rgba(22, 39, 43, 1) 100%);
+
+  }
+
+  h4 {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 20px 0px;
+
+  }
+
+  .container {
+    margin-top: 20px;
+    min-height: 75vh;
+
+  }
+
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px; */
+    max-width: 100%;
+    /* margin: 20px 0; */
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 15px 20px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .left {
+    /* border: 1px solid black; */
+    width: 330px;
+    height: 465px;
+  }
+
+  .right {
+    /* border: 1px solid red; */
+    height: 465px;
+    width: 100%;
+  }
+
+  button,
+  a.download {
+    display: block;
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 20px;
+  }
+
+
+  a:hover {
+    background: none;
+  }
+
+  .content {
+    text-align: center;
+    padding: 0 20px;
+    /* border: 1px solid green; */
+    width: 80%;
+  }
+
+  li {
+    list-style: decimal;
+    text-align: left;
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    line-height: 2rem;
+
+  }
+
+  .upload {
+    width: 330px;
+    height: 465px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .box {
+      flex-direction: column;
+    }
+
+    .left,
+    .upload {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .right {
+      /* border: 1px solid red; */
+      height: auto;
+    }
+  }
+</style>
+
+{% endblock %}
+
+<!--Title tag-->
+{% block title %}Sign-Up{% endblock %}
+
+<!--Body tag-->
+{% block content %}
+<div class="container">
+  <div class="box">
+    <div class="left">
+      <img class="upload" src="{{filepath}}">
+    </div>
+    <div class="right">
+      <div class="header" style="text-align: center;">
+        {% if msg == "Result: INFECTED"%}
+        <div>
+          <h2 class="msg alert alert-danger">{{ msg }}</h2>
+          <h4>Symptoms of malaria</h4>
+          <center>
+            <ul class="content">
+              <li>A high temperature (fever)</li>
+              <li>Sweats and chills</li>
+              <li>Headaches</li>
+              <li>Vomiting and Muscle Pain</li>
+              <strong><em>Contact a doctor to start treatment!</em></strong>
+            </ul>
+          </center>
+        </div>
+        {%elif msg == "Result: UNINFECTED"%}
+        <div>
+          <h2 class="msg alert alert-success">{{ msg }}</h2>
+          <h4>Precaution to avoid malaria</h4>
+          <center>
+            <ul class="content">
+              <li> Applying mosquito repellents. Remember to reapply it frequently.</li>
+              <li>Always using mosquito nets over the bed.</li>
+              <li>Avoid travelling to areas with a malaria outbreak</li>
+              <li>Special attention must be paid towards infants and young kids to ensure that mosquitoes don’t bite.
+              </li>
+            </ul>
+          </center>
+        </div>
+        {%endif%}
+        <form action="{{url_for('result')}}" method="POST">
+          <input type="hidden" name="msg" id="msg" value="{{msg}}">
+          <button type="submit" class="btn btn-dark" style="padding: 20px;">
+            Do you want the result in your mail
+          </button>
+        </form>
+        <button id="btn" class="btn btn-outline-warning" style="padding: 20px;">
+          Download the result
+        </button>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction: row-reverse;">
+    <a class="btn btn-primary" href="{{url_for('login')}}"
+      style="text-decoration: none;padding: 10px 20px;width: 150px;margin: 20px 0px;">Go
+      back
+    </a>
+  </div>
+</div>
+<script>
+  function download(filename, textInput) {
+
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8, ' + encodeURIComponent(textInput));
+    element.setAttribute('download', filename);
+    document.body.appendChild(element);
+    element.click();
+    //document.body.removeChild(element);
+  }
+  document.getElementById("btn")
+    .addEventListener("click", function () {
+      var text = "Your Result:\n Name: {{name}}\n Age:{{age}}\n Temperature:{{temp}}\n{{msg}}";
+      var filename = "result.txt";
+      download(filename, text);
+    }, false);
+</script>
+{% endblock %}
