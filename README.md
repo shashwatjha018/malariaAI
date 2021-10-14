@@ -91,7 +91,7 @@ The main objectives of this project is to **give patients instant result whether
 
 11. To run and deploy the application in your local server, use the below commands step by step.
   ```bash
-  set FLASK_APP = run.py 
+  set FLASK_APP = app.py 
   flask run 
   ```
 12. To run and deploy the application in your local server in _debug mode_, use the below commands step by step.
