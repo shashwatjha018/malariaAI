@@ -33,8 +33,8 @@ app.config['MONGO_URI'] = 'mongodb+srv://Shashwat:shashwat@cluster0.jzqpm.mongod
 #Mail connection configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = '465'
-app.config['MAIL_USERNAME'] = 'shashwatjha018@gmail.com'
-app.config['MAIL_PASSWORD'] = 'encrypt##shash$1'
+app.config['MAIL_USERNAME'] = '' #Enter a gmail account
+app.config['MAIL_PASSWORD'] = '' #Enter the password
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
